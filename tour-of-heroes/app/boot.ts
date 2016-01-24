@@ -1,0 +1,7 @@
+/**
+ * Created by shanmugavelsundaramoorthy on 1/24/16.
+ */
+import {bootstrap} from 'angular2/platform/browser'
+import {AppComponent} from './app.component'
+
+bootstrap(AppComponent);
