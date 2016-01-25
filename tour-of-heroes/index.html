@@ -2,12 +2,17 @@
 <html>
   <head>
     <title>Tour of Heroes!</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <!-- IE required polyfills, in this exact order -->
     <script src="node_modules/es6-shim/es6-shim.min.js"></script>
     <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
     <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <!-- Add Bootstrap and Jquery js for integrating with bootstrap -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
     <script>
       System.config({
@@ -22,6 +27,6 @@
     </script>
   </head>
   <body>
-    <my-app>Loading...</my-app>
+    <my-app class="container-fluid">Loading...</my-app>
   </body>
 </html>
