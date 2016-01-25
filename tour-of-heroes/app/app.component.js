@@ -18,13 +18,31 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             AppComponent = (function () {
                 function AppComponent() {
-                    this.title = "Tour of Heroes";
-                    this.hero = { id: 1, name: "Shan" };
+                    this.title = "My Heroes!";
+                    //classes
+                    this.activeItem = "list-group-item active";
+                    this.inactiveItem = "list-group-item";
+                    this.heroes = [
+                        { id: 1, name: "Shan" },
+                        { id: 2, name: "Raj" },
+                        { id: 3, name: "Seenu" }
+                    ];
                 }
+                AppComponent.prototype.onSelect = function (hero) {
+                    this.selectedHero = hero;
+                };
+                AppComponent.prototype.applyStyle = function (hero) {
+                    if (hero === this.selectedHero) {
+                        return this.activeItem;
+                    }
+                    else {
+                        return this.inactiveItem;
+                    }
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: "my-app",
-                        template: "<h1>{{title}}</h1>\n                <h2>{{hero.name}}'s details:</h2>\n                <div><label>id: </label>{{hero.id}}</div>\n                <div>\n                    <label>name: </label>\n                    <div><input [(ngModel)]=\"hero.name\" placeholder=\"name\"/></div>\n                </div>"
+                        template: "<h2>{{title}}</h2>\n                <div class=\"jumbotron\">\n                    <ul class=\"list-group\">\n                        <li  *ngFor=\"#hero of heroes;\" (click)=\"onSelect(hero);\" [ngClass]=\"applyStyle(hero)\">\n                            <span class=\"badge pull-left\">{{hero.id}}</span>&nbsp;{{hero.name}}\n                        </li>\n                    </ul>\n                    <div *ngIf=\"selectedHero\">\n                      <h2>{{selectedHero.name}} details!</h2>\n                      <div><label>id: </label>{{selectedHero.id}}</div>\n                      <div>\n                        <label>name: </label>\n                        <input [(ngModel)]=\"selectedHero.name\" placeholder=\"name\"/>\n                      </div>\n                    </div>\n                </div>"
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
