@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core', './hero-detail.component', './service/hero.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,25 +8,28 @@ System.register(['angular2/core'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, hero_detail_component_1, hero_service_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (hero_detail_component_1_1) {
+                hero_detail_component_1 = hero_detail_component_1_1;
+            },
+            function (hero_service_1_1) {
+                hero_service_1 = hero_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(_heroService) {
+                    this._heroService = _heroService;
                     this.title = "My Heroes!";
                     //classes
                     this.activeItem = "list-group-item active";
                     this.inactiveItem = "list-group-item";
-                    this.heroes = [
-                        { id: 1, name: "Shan" },
-                        { id: 2, name: "Raj" },
-                        { id: 3, name: "Seenu" }
-                    ];
+                    this.heroes = _heroService.getHeroes();
                 }
                 AppComponent.prototype.onSelect = function (hero) {
                     this.selectedHero = hero;
@@ -42,9 +45,11 @@ System.register(['angular2/core'], function(exports_1) {
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: "my-app",
-                        template: "<h2>{{title}}</h2>\n                <div class=\"jumbotron\">\n                    <ul class=\"list-group\">\n                        <li  *ngFor=\"#hero of heroes;\" (click)=\"onSelect(hero);\" [ngClass]=\"applyStyle(hero)\">\n                            <span class=\"badge pull-left\">{{hero.id}}</span>&nbsp;{{hero.name}}\n                        </li>\n                    </ul>\n                    <div *ngIf=\"selectedHero\">\n                      <h2>{{selectedHero.name}} details!</h2>\n                      <div><label>id: </label>{{selectedHero.id}}</div>\n                      <div>\n                        <label>name: </label>\n                        <input [(ngModel)]=\"selectedHero.name\" placeholder=\"name\"/>\n                      </div>\n                    </div>\n                </div>"
+                        template: "<h2>{{title}}</h2>\n                <div class=\"jumbotron\">\n                    <ul class=\"list-group\">\n                        <li  *ngFor=\"#hero of heroes;\" (click)=\"onSelect(hero);\" [ngClass]=\"applyStyle(hero)\">\n                            <span class=\"badge pull-left\">{{hero.id}}</span>&nbsp;{{hero.name}}\n                        </li>\n                    </ul>\n                    <my-hero-detail [hero]=\"selectedHero\"></my-hero-detail>\n                </div>",
+                        directives: [hero_detail_component_1.HeroDetailComponent],
+                        providers: [hero_service_1.HeroService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [hero_service_1.HeroService])
                 ], AppComponent);
                 return AppComponent;
             })();

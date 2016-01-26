@@ -2,11 +2,9 @@
  * Created by shanmugavelsundaramoorthy on 1/24/16.
  */
 import {Component} from 'angular2/core'
-
-interface Hero {
-    id:number;
-    name:string;
-}
+import {Hero} from './contract/hero'
+import {HeroDetailComponent} from './hero-detail.component'
+import {HeroService} from './service/hero.service'
 
 @Component({
     selector : "my-app",
@@ -17,15 +15,10 @@ interface Hero {
                             <span class="badge pull-left">{{hero.id}}</span>&nbsp;{{hero.name}}
                         </li>
                     </ul>
-                    <div *ngIf="selectedHero">
-                      <h2>{{selectedHero.name}} details!</h2>
-                      <div><label>id: </label>{{selectedHero.id}}</div>
-                      <div>
-                        <label>name: </label>
-                        <input [(ngModel)]="selectedHero.name" placeholder="name"/>
-                      </div>
-                    </div>
-                </div>`
+                    <my-hero-detail [hero]="selectedHero"></my-hero-detail>
+                </div>`,
+    directives : [HeroDetailComponent],
+    providers : [HeroService]
 })
 
 export class AppComponent {
@@ -36,16 +29,16 @@ export class AppComponent {
      activeItem:string = "list-group-item active";
      inactiveItem:string = "list-group-item";
 
-    heroes : Hero[] = [
-         { id:1, name: "Shan"},
-         { id:2, name: "Raj"},
-         { id:3, name: "Seenu"}
-     ];
+    heroes : Hero[];
+
+    constructor(private _heroService : HeroService) {
+        this.heroes = _heroService.getHeroes();
+    }
 
     onSelect(hero:Hero) {
         this.selectedHero = hero;
     }
-    
+
     applyStyle(hero:Hero) : string {
         if (hero === this.selectedHero) {
             return this.activeItem;
