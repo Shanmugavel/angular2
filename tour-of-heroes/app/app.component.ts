@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
 
     getHeroes() {
         //Load Heroes from service
-        this.heroes = this._heroService.getHeroes();
+       this._heroService.getHeroes().then(heroes => { this.heroes = heroes }).catch( err => console.error( err));
     }
 
     onSelect(hero:Hero) {

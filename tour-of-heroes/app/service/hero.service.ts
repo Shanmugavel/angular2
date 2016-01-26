@@ -8,6 +8,6 @@ import {HEROES} from '../mock/mock-heroes'
 export class HeroService {
 
     getHeroes() {
-        return HEROES;
+        return Promise.resolve(HEROES);
     }
 }

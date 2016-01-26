@@ -35,8 +35,9 @@ System.register(['angular2/core', './hero-detail.component', './service/hero.ser
                     this.getHeroes();
                 };
                 AppComponent.prototype.getHeroes = function () {
+                    var _this = this;
                     //Load Heroes from service
-                    this.heroes = this._heroService.getHeroes();
+                    this._heroService.getHeroes().then(function (heroes) { _this.heroes = heroes; }).catch(function (err) { return console.error(err); });
                 };
                 AppComponent.prototype.onSelect = function (hero) {
                     this.selectedHero = hero;
