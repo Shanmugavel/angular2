@@ -29,8 +29,15 @@ System.register(['angular2/core', './hero-detail.component', './service/hero.ser
                     //classes
                     this.activeItem = "list-group-item active";
                     this.inactiveItem = "list-group-item";
-                    this.heroes = _heroService.getHeroes();
+                    //Inject and export hero service
                 }
+                AppComponent.prototype.ngOnInit = function () {
+                    this.getHeroes();
+                };
+                AppComponent.prototype.getHeroes = function () {
+                    //Load Heroes from service
+                    this.heroes = this._heroService.getHeroes();
+                };
                 AppComponent.prototype.onSelect = function (hero) {
                     this.selectedHero = hero;
                 };

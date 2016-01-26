@@ -1,7 +1,7 @@
 /**
  * Created by shanmugavelsundaramoorthy on 1/24/16.
  */
-import {Component} from 'angular2/core'
+import {Component, OnInit} from 'angular2/core'
 import {Hero} from './contract/hero'
 import {HeroDetailComponent} from './hero-detail.component'
 import {HeroService} from './service/hero.service'
@@ -21,7 +21,7 @@ import {HeroService} from './service/hero.service'
     providers : [HeroService]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
      title:string = "My Heroes!";
      selectedHero:Hero;
 
@@ -32,7 +32,16 @@ export class AppComponent {
     heroes : Hero[];
 
     constructor(private _heroService : HeroService) {
-        this.heroes = _heroService.getHeroes();
+        //Inject and export hero service
+    }
+
+    ngOnInit() : void {
+      this.getHeroes();
+    }
+
+    getHeroes() {
+        //Load Heroes from service
+        this.heroes = this._heroService.getHeroes();
     }
 
     onSelect(hero:Hero) {
