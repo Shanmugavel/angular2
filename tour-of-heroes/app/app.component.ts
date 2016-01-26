@@ -8,17 +8,8 @@ import {HeroService} from './service/hero.service'
 
 @Component({
     selector : "my-app",
-    template : `<h2>{{title}}</h2>
-                <div class="jumbotron">
-                    <ul class="list-group">
-                        <li  *ngFor="#hero of heroes;" (click)="onSelect(hero);" [ngClass]="applyStyle(hero)">
-                            <span class="badge pull-left">{{hero.id}}</span>&nbsp;{{hero.name}}
-                        </li>
-                    </ul>
-                    <my-hero-detail [hero]="selectedHero"></my-hero-detail>
-                </div>`,
-    directives : [HeroDetailComponent],
-    providers : [HeroService]
+    templateUrl : 'app/template/list-heroes.html',
+    directives : [HeroDetailComponent]
 })
 
 export class AppComponent implements OnInit {

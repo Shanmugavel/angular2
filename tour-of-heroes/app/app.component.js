@@ -53,9 +53,8 @@ System.register(['angular2/core', './hero-detail.component', './service/hero.ser
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: "my-app",
-                        template: "<h2>{{title}}</h2>\n                <div class=\"jumbotron\">\n                    <ul class=\"list-group\">\n                        <li  *ngFor=\"#hero of heroes;\" (click)=\"onSelect(hero);\" [ngClass]=\"applyStyle(hero)\">\n                            <span class=\"badge pull-left\">{{hero.id}}</span>&nbsp;{{hero.name}}\n                        </li>\n                    </ul>\n                    <my-hero-detail [hero]=\"selectedHero\"></my-hero-detail>\n                </div>",
-                        directives: [hero_detail_component_1.HeroDetailComponent],
-                        providers: [hero_service_1.HeroService]
+                        templateUrl: 'app/template/list-heroes.html',
+                        directives: [hero_detail_component_1.HeroDetailComponent]
                     }), 
                     __metadata('design:paramtypes', [hero_service_1.HeroService])
                 ], AppComponent);

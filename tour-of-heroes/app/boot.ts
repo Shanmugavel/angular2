@@ -3,5 +3,5 @@
  */
 import {bootstrap} from 'angular2/platform/browser'
 import {AppComponent} from './app.component'
-
-bootstrap(AppComponent);
+import {HeroService}  from './service/hero.service'
+bootstrap(AppComponent, [HeroService]);
